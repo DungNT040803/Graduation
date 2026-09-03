@@ -1,0 +1,321 @@
+/* ====================================================
+   🎉 EVENT PAGE STYLES
+   ==================================================== */
+
+.event {
+  min-height: 100vh;
+  background: var(--gradient-bg);
+  padding: var(--space-16) 0;
+}
+
+.event__header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.event__title {
+  font-size: var(--text-5xl);
+  margin-bottom: var(--space-4);
+}
+
+.event__subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
+/* Countdown */
+.event__countdown {
+  max-width: 800px;
+  margin: 0 auto var(--space-12);
+  padding: 0 var(--space-6);
+}
+
+.event__countdown-card {
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.event__countdown-label {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+  font-weight: 600;
+}
+
+.event__countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.event__countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 100px;
+}
+
+.event__countdown-number {
+  font-family: var(--font-heading);
+  font-size: var(--text-6xl);
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  transition: var(--transition-base);
+  position: relative;
+}
+
+.event__countdown-number.flip {
+  animation: pop-in 0.4s ease;
+}
+
+.event__countdown-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.event__countdown-separator {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  color: var(--color-primary);
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  animation: pulse 1s infinite;
+}
+
+/* Event Details */
+.event__details {
+  max-width: 800px;
+  margin: 0 auto var(--space-10);
+  padding: 0 var(--space-6);
+}
+
+.event__details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.event__detail-card {
+  padding: var(--space-6);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  transition: var(--transition-base);
+  cursor: default;
+}
+
+.event__detail-card:hover {
+  background: var(--color-bg-glass-hover);
+  transform: translateY(-4px);
+}
+
+.event__detail-icon {
+  font-size: 2rem;
+  min-width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 217, 61, 0.1);
+  border-radius: var(--radius-md);
+}
+
+.event__detail-content {
+  flex: 1;
+}
+
+.event__detail-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.event__detail-value {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Map */
+.event__map {
+  max-width: 800px;
+  margin: 0 auto var(--space-10);
+  padding: 0 var(--space-6);
+}
+
+.event__map-card {
+  padding: var(--space-4);
+  overflow: hidden;
+}
+
+.event__map-title {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.event__map-iframe {
+  width: 100%;
+  height: 350px;
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+/* RSVP Section */
+.event__rsvp {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  text-align: center;
+}
+
+.event__rsvp-card {
+  padding: var(--space-10);
+  position: relative;
+  overflow: hidden;
+}
+
+.event__rsvp-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-xl);
+  z-index: -1;
+  opacity: 0.3;
+  animation: gradient-shift 4s ease infinite;
+  background-size: 200% 200%;
+}
+
+.event__rsvp-title {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-3);
+}
+
+.event__rsvp-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-8);
+}
+
+.event__rsvp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-12);
+  background: var(--gradient-primary);
+  color: var(--color-bg-dark);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  border-radius: var(--radius-full);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: var(--shadow-glow-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.event__rsvp-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.event__rsvp-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.event__rsvp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 60px rgba(255, 217, 61, 0.6);
+}
+
+.event__rsvp-btn:active {
+  transform: scale(0.95);
+}
+
+.event__rsvp-btn-text {
+  transition: var(--transition-base);
+}
+
+.event__rsvp-btn-emoji {
+  font-size: var(--text-2xl);
+  transition: var(--transition-bounce);
+}
+
+.event__rsvp-btn:hover .event__rsvp-btn-emoji {
+  animation: wiggle 0.5s ease infinite;
+}
+
+.event__rsvp-note {
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.event__rsvp-dresscode {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  background: rgba(107, 203, 119, 0.1);
+  border: 1px solid rgba(107, 203, 119, 0.2);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .event__details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event__countdown-unit {
+    min-width: 70px;
+  }
+
+  .event__countdown-number {
+    font-size: var(--text-4xl);
+  }
+
+  .event__rsvp-card {
+    padding: var(--space-6);
+  }
+
+  .event__rsvp-btn {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+  }
+
+  .event__map-iframe {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .event__countdown-timer {
+    gap: var(--space-2);
+  }
+
+  .event__countdown-separator {
+    display: none;
+  }
+}

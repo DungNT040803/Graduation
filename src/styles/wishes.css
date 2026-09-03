@@ -1,0 +1,132 @@
+/* ====================================================
+   💌 WISHES PAGE STYLES
+   ==================================================== */
+
+.wishes {
+  min-height: 100vh;
+  background: var(--gradient-bg);
+  padding: var(--space-16) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.wishes__header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+  position: relative;
+  z-index: 2;
+}
+
+.wishes__title {
+  font-size: var(--text-5xl);
+  margin-bottom: var(--space-4);
+}
+
+.wishes__subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Form container */
+.wishes__form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  position: relative;
+  z-index: 2;
+}
+
+.wishes__form-card {
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.wishes__form-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent,
+    rgba(255, 217, 61, 0.1),
+    transparent,
+    rgba(255, 107, 107, 0.1),
+    transparent
+  );
+  animation: spin 8s linear infinite;
+  z-index: -1;
+}
+
+.wishes__form-inner {
+  background: rgba(15, 14, 23, 0.8);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2);
+  overflow: hidden;
+}
+
+.wishes__iframe {
+  width: 100%;
+  min-height: 600px;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: white;
+}
+
+/* Instructions */
+.wishes__instructions {
+  max-width: 700px;
+  margin: var(--space-8) auto 0;
+  padding: 0 var(--space-6);
+  text-align: center;
+}
+
+.wishes__instructions-card {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.wishes__instruction-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+}
+
+.wishes__instruction-icon {
+  font-size: var(--text-xl);
+  min-width: 30px;
+}
+
+/* Floating decorations */
+.wishes__floating-hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.wishes__heart {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: emoji-float linear infinite;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .wishes__iframe {
+    min-height: 500px;
+  }
+
+  .wishes__form-card {
+    padding: var(--space-3);
+  }
+}

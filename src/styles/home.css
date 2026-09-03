@@ -1,0 +1,184 @@
+/* ====================================================
+   🏠 HOME PAGE STYLES
+   ==================================================== */
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--gradient-bg);
+}
+
+/* 3D Canvas */
+.home__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Content overlay */
+.home__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--space-8);
+  max-width: 800px;
+}
+
+.home__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  background: rgba(255, 217, 61, 0.1);
+  border: 1px solid rgba(255, 217, 61, 0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: var(--space-6);
+  animation: glow-pulse 3s infinite;
+}
+
+.home__title {
+  font-size: var(--text-6xl);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+  line-height: 1.1;
+}
+
+.home__title-highlight {
+  display: block;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home__subtitle {
+  font-size: var(--text-xl);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-10);
+  font-weight: 500;
+}
+
+.home__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-10);
+  background: var(--gradient-primary);
+  color: var(--color-bg-dark);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-glow-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.home__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.home__cta:hover::before {
+  transform: translateX(100%);
+}
+
+.home__cta:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 217, 61, 0.5);
+}
+
+.home__cta-emoji {
+  font-size: var(--text-2xl);
+  animation: bounce 1s infinite;
+}
+
+/* Floating emoji decorations */
+.home__floating-emoji {
+  position: absolute;
+  font-size: 2rem;
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home__floating-emoji:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+.home__floating-emoji:nth-child(2) { top: 25%; right: 15%; animation-delay: 1s; }
+.home__floating-emoji:nth-child(3) { bottom: 30%; left: 8%; animation-delay: 2s; }
+.home__floating-emoji:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 3s; }
+.home__floating-emoji:nth-child(5) { top: 60%; left: 20%; animation-delay: 4s; }
+.home__floating-emoji:nth-child(6) { top: 40%; right: 25%; animation-delay: 5s; }
+
+/* Confetti */
+.home__confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  animation: confetti-fall linear infinite;
+  opacity: 0.8;
+}
+
+.confetti-piece:nth-child(odd) {
+  border-radius: 50%;
+}
+
+/* Scroll indicator */
+.home__scroll-indicator {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  animation: bounce 2s infinite;
+}
+
+.home__scroll-arrow {
+  width: 24px;
+  height: 24px;
+  border-right: 2px solid var(--color-text-muted);
+  border-bottom: 2px solid var(--color-text-muted);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .home__content {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .home__cta {
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--text-base);
+  }
+
+  .home__floating-emoji {
+    font-size: 1.5rem;
+  }
+}
