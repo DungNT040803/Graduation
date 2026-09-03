@@ -36,11 +36,11 @@ const chipVariants = {
 const infoItems = [
   { icon: '👤', label: 'Họ tên', value: personalInfo.name, tooltipKey: 'name' },
   { icon: '🎂', label: 'Ngày sinh', value: personalInfo.birthday, tooltipKey: 'birthday' },
+  { icon: '❤️', label: 'Tình trạng', value: personalInfo.relationshipStatus, tooltipKey: 'relationshipStatus' },
   { icon: '🏫', label: 'Trường', value: personalInfo.school, tooltipKey: 'school' },
   { icon: '📚', label: 'Khoa', value: personalInfo.faculty, tooltipKey: 'faculty' },
   { icon: '💻', label: 'Chuyên ngành', value: personalInfo.major, tooltipKey: 'major' },
   { icon: '🏠', label: 'Quê quán', value: personalInfo.hometown, tooltipKey: 'hometown' },
-  { icon: '❤️', label: 'Tình trạng', value: personalInfo.relationshipStatus, tooltipKey: 'relationshipStatus' },
 ];
 
 export default function AboutMe({ onNext, onPrev }) {
