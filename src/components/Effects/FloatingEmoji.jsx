@@ -1,18 +1,22 @@
-import { useMemo } from 'react';
+import { useMemo, memo } from 'react';
 import { motion } from 'framer-motion';
 
-// Floating emoji background decoration
-export default function FloatingEmoji({ emojis = ['💕', '✨', '🌟', '💫', '🎉'], count = 12 }) {
+// Floating emoji background decoration - memoized to prevent re-renders when parent states change
+function FloatingEmoji({ emojis = ['💕', '✨', '🌟', '💫', '🎉'], count = 10 }) {
+  const emojiKey = Array.isArray(emojis) ? emojis.join('') : '';
+
   const items = useMemo(() => {
+    const list = Array.isArray(emojis) && emojis.length > 0 ? emojis : ['✨', '🎉'];
     return Array.from({ length: count }, (_, i) => ({
       id: i,
-      emoji: emojis[i % emojis.length],
-      left: `${Math.random() * 100}%`,
-      size: 1 + Math.random() * 1.5,
-      duration: 8 + Math.random() * 10,
-      delay: Math.random() * 8,
+      emoji: list[i % list.length],
+      left: `${(i / count) * 90 + Math.random() * 8}%`,
+      size: 1.1 + (i % 3) * 0.4,
+      duration: 12 + (i % 5) * 2,
+      delay: (i * 1.2) % 8,
     }));
-  }, [emojis, count]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [emojiKey, count]);
 
   return (
     <div
@@ -21,7 +25,7 @@ export default function FloatingEmoji({ emojis = ['💕', '✨', '🌟', '💫',
         inset: 0,
         pointerEvents: 'none',
         overflow: 'hidden',
-        zIndex: 1,
+        zIndex: 0,
       }}
     >
       {items.map((item) => (
@@ -30,14 +34,14 @@ export default function FloatingEmoji({ emojis = ['💕', '✨', '🌟', '💫',
           style={{
             position: 'absolute',
             left: item.left,
-            bottom: '-50px',
+            bottom: '-60px',
             fontSize: `${item.size}rem`,
             opacity: 0,
           }}
           animate={{
-            y: [0, -window.innerHeight - 100],
-            opacity: [0, 0.6, 0.6, 0],
-            rotate: [0, 360],
+            y: [0, -window.innerHeight - 120],
+            opacity: [0, 0.4, 0.4, 0],
+            rotate: [0, 180],
           }}
           transition={{
             duration: item.duration,
@@ -52,3 +56,5 @@ export default function FloatingEmoji({ emojis = ['💕', '✨', '🌟', '💫',
     </div>
   );
 }
+
+export default memo(FloatingEmoji);

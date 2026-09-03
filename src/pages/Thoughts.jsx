@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import FloatingEmoji from '../components/Effects/FloatingEmoji';
 import NextSectionButton from '../components/UI/NextSectionButton';
 import { personalInfo } from '../data/personalInfo';
 import '../styles/thoughts.css';
@@ -23,7 +22,7 @@ export default function Thoughts({ onNext, onPrev }) {
     if (currentCharIndex < currentPara.length) {
       const timer = setTimeout(() => {
         setCurrentCharIndex((prev) => prev + 1);
-      }, 25);
+      }, 30);
       return () => clearTimeout(timer);
     } else {
       // Completed current paragraph, pause then move to next
@@ -31,7 +30,7 @@ export default function Thoughts({ onNext, onPrev }) {
         setCompletedParas((prev) => [...prev, currentPara]);
         setCurrentParaIndex((prev) => prev + 1);
         setCurrentCharIndex(0);
-      }, 400);
+      }, 450);
       return () => clearTimeout(pauseTimer);
     }
   }, [currentParaIndex, currentCharIndex, isDone, paragraphs]);
@@ -45,9 +44,20 @@ export default function Thoughts({ onNext, onPrev }) {
 
   return (
     <section className="thoughts">
-      <FloatingEmoji
-        emojis={['💌', '✨', '💭', '🎓', '💫', '🌸']}
-        count={8}
+      {/* Gentle ambient glow behind the card (stationary, no flying icons) */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '20%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '500px',
+          height: '350px',
+          background: 'radial-gradient(ellipse, rgba(255, 217, 61, 0.08) 0%, rgba(255, 107, 107, 0.04) 50%, transparent 70%)',
+          filter: 'blur(40px)',
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
       />
 
       {/* Header */}
@@ -56,6 +66,7 @@ export default function Thoughts({ onNext, onPrev }) {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
+        style={{ position: 'relative', zIndex: 2 }}
       >
         <h1 className="thoughts__title">
           <span className="gradient-text">Đôi Lời Tâm Sự</span> 💌
@@ -71,6 +82,7 @@ export default function Thoughts({ onNext, onPrev }) {
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.3 }}
+        style={{ position: 'relative', zIndex: 2 }}
       >
         <div className="thoughts__quote-icon">❝</div>
 
@@ -113,6 +125,7 @@ export default function Thoughts({ onNext, onPrev }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: isDone ? 0.2 : 0.8 }}
+          style={{ position: 'relative', zIndex: 2 }}
         >
           <NextSectionButton
             onClick={onNext}
