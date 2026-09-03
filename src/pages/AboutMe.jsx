@@ -40,6 +40,7 @@ const infoItems = [
   { icon: '📚', label: 'Khoa', value: personalInfo.faculty, tooltipKey: 'faculty' },
   { icon: '💻', label: 'Chuyên ngành', value: personalInfo.major, tooltipKey: 'major' },
   { icon: '🏠', label: 'Quê quán', value: personalInfo.hometown, tooltipKey: 'hometown' },
+  { icon: '❤️', label: 'Tình trạng', value: personalInfo.relationshipStatus, tooltipKey: 'relationshipStatus' },
 ];
 
 export default function AboutMe({ onNext, onPrev }) {
