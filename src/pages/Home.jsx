@@ -80,8 +80,8 @@ export default function Home({ onNext }) {
 
         <NextSectionButton
           onClick={onNext}
-          text="Tìm hiểu về mình nào!"
-          emoji="🤓"
+          text="Đôi lời tâm sự cùng bạn"
+          emoji="💌"
         />
       </motion.div>
 

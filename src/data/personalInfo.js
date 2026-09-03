@@ -19,6 +19,14 @@ export const personalInfo = {
     { text: "Nghe nhạc", emoji: "🎵" },
     { text: "Xem phim", emoji: "🎬" },
   ],
+  // Đôi lời tâm sự tốt nghiệp
+  thoughts: [
+    "Chào bạn, người đang đọc những dòng này! ✨",
+    "Thế là hành trình 4 năm đại học tại FPT của mình đã chính thức khép lại. Nhìn lại chặng đường vừa qua, có những đêm thức trắng cùng đồ án, những dòng code 'chạy bằng niềm tin' và không ít lần bế tắc... 🐛💻",
+    "Nhưng nhờ có sự đồng hành, động viên của gia đình, thầy cô và đặc biệt là những người bạn tuyệt vời như bạn, mình đã có thể kiên trì bước tiếp đến ngày hôm nay. 🎓",
+    "Tấm bằng tốt nghiệp này không chỉ là dấu mốc của riêng mình, mà còn gói ghém biết bao kỷ niệm đẹp của tuổi thanh xuân rực rỡ bên các bạn.",
+    "Ngày vui này sẽ trọn vẹn hơn rất nhiều nếu có sự hiện diện của bạn. Hãy đến chung vui và cùng mình ghi lại những khoảnh khắc đáng nhớ nhé! 💕🥂"
+  ],
   motto: "Sống là phải vui, buồn thì đi ngủ! 😄",
   futureGoals: [
     { icon: "🚀", text: "Trở thành Full-stack Developer" },

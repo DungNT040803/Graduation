@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MusicPlayer from './components/Layout/MusicPlayer';
 import Home from './pages/Home';
+import Thoughts from './pages/Thoughts';
 import AboutMe from './pages/AboutMe';
 import Wishes from './pages/Wishes';
 import Event from './pages/Event';
@@ -75,10 +76,11 @@ const pageTransitions = {
 
 // Mỗi trang dùng 1 hiệu ứng khác nhau
 const transitionPerStep = [
-  pageTransitions.zoomIn,      // Home → About: zoom in
-  pageTransitions.slideRight,  // About → Wishes: slide
-  pageTransitions.slideUp,     // Wishes → Event: slide up
-  pageTransitions.flipIn,      // (fallback)
+  pageTransitions.zoomIn,      // Home → Thoughts
+  pageTransitions.slideRight,  // Thoughts → AboutMe
+  pageTransitions.flipIn,      // AboutMe → Wishes
+  pageTransitions.slideUp,     // Wishes → Event
+  pageTransitions.slideRight,
 ];
 
 const overlayVariants = {
@@ -98,7 +100,7 @@ export default function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const goToNext = useCallback(() => {
-    if (currentStep >= 3 || isTransitioning) return;
+    if (currentStep >= 4 || isTransitioning) return;
     setIsTransitioning(true);
     setCurrentStep((prev) => prev + 1);
     // Scroll to top of new page
@@ -116,6 +118,7 @@ export default function App() {
 
   const steps = [
     <Home key="home" onNext={goToNext} />,
+    <Thoughts key="thoughts" onNext={goToNext} onPrev={goToPrev} />,
     <AboutMe key="about" onNext={goToNext} onPrev={goToPrev} />,
     <Wishes key="wishes" onNext={goToNext} onPrev={goToPrev} />,
     <Event key="event" onPrev={goToPrev} />,
@@ -140,7 +143,7 @@ export default function App() {
           gap: '10px',
         }}
       >
-        {[0, 1, 2, 3].map((step) => (
+        {[0, 1, 2, 3, 4].map((step) => (
           <motion.div
             key={step}
             style={{
@@ -154,7 +157,7 @@ export default function App() {
               transition: 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
               cursor: 'default',
             }}
-            title={['Trang chủ', 'Về tôi', 'Lời chúc', 'Sự kiện'][step]}
+            title={['Trang chủ', 'Tâm sự', 'Về tôi', 'Lời chúc', 'Sự kiện'][step]}
           />
         ))}
       </div>
