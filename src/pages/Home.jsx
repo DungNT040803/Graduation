@@ -75,7 +75,7 @@ export default function Home({ onNext }) {
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5 }}
         >
-          Đến chung vui với mình nhé! Có đồ ăn miễn phí đó 🍕🎂
+          Nhớ mang quà tới nhá 🔥
         </motion.p>
 
         <NextSectionButton
