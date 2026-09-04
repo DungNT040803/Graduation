@@ -119,21 +119,23 @@ export default function Thoughts({ onNext, onPrev }) {
         )}
       </motion.div>
 
-      {/* Navigation Button */}
+      {/* Navigation Button — chỉ hiện khi chữ đã chạy hết */}
       <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: isDone ? 0.2 : 0.8 }}
-          style={{ position: 'relative', zIndex: 2 }}
-        >
-          <NextSectionButton
-            onClick={onNext}
-            onPrev={onPrev}
-            text="Khám phá về mình nào!"
-            emoji="🤓"
-          />
-        </motion.div>
+        {isDone && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3, type: 'spring', stiffness: 100 }}
+            style={{ position: 'relative', zIndex: 2 }}
+          >
+            <NextSectionButton
+              onClick={onNext}
+              onPrev={onPrev}
+              text="Khám phá về mình nào!"
+              emoji="🤓"
+            />
+          </motion.div>
+        )}
       </AnimatePresence>
     </section>
   );

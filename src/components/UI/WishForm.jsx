@@ -63,7 +63,7 @@ const submitBtnStyle = {
   marginTop: '1.5rem',
 };
 
-export default function WishForm({ scriptUrl }) {
+export default function WishForm({ scriptUrl, onSuccess }) {
   const [formData, setFormData] = useState({
     name: '',
     message: '',
@@ -95,6 +95,7 @@ export default function WishForm({ scriptUrl }) {
       });
 
       setStatus('success');
+      if (onSuccess) onSuccess();
       setTimeout(() => {
         setStatus('idle');
         setFormData({ name: '', message: '' });

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowLeft } from 'react-icons/fi';
 import CountdownTimer from '../components/UI/CountdownTimer';
 import FloatingEmoji from '../components/Effects/FloatingEmoji';
@@ -29,6 +29,19 @@ export default function Event({ onPrev }) {
   const [rsvpHover, setRsvpHover] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [declinePos, setDeclinePos] = useState({ x: 0, y: 0 });
+  const [declineCount, setDeclineCount] = useState(0);
+  const [showDeclineMsg, setShowDeclineMsg] = useState(false);
+  const declineBtnRef = useRef(null);
+
+  const declineMessages = [
+    "Không được từ chối đâu! 😤",
+    "Bạn chắc chưa? Suy nghĩ lại đi! 🥺",
+    "Nút này bị hỏng rồi, bấm nút kia đi! 😜",
+    "Từ chối là không có quà đâu nha! 🎁",
+    "Mình buồn lắm nếu bạn không đến 😢",
+    "KHÔNG CHẤP NHẬN TỪ CHỐI! 🚫",
+  ];
 
   const eventDate = new Date(eventInfo.date);
   const formattedDate = eventDate.toLocaleDateString('vi-VN', {
@@ -46,6 +59,27 @@ export default function Event({ onPrev }) {
     setShowConfetti(true);
     setIsModalOpen(true);
     setTimeout(() => setShowConfetti(false), 3000);
+  };
+
+  const handleDeclineHover = () => {
+    // Nút chạy trốn khi hover
+    const randX = (Math.random() - 0.5) * 300;
+    const randY = (Math.random() - 0.5) * 200;
+    setDeclinePos({ x: randX, y: randY });
+    setDeclineCount((prev) => prev + 1);
+
+    // Sau 3 lần cố gắng, hiện tin nhắn troll
+    if (declineCount >= 2) {
+      setShowDeclineMsg(true);
+      setTimeout(() => setShowDeclineMsg(false), 2500);
+      setDeclineCount(0);
+    }
+  };
+
+  const handleDeclineClick = () => {
+    // Nếu bằng cách nào đó bấm được thì vẫn troll
+    setShowDeclineMsg(true);
+    setTimeout(() => setShowDeclineMsg(false), 3000);
   };
 
   const details = [
@@ -201,21 +235,88 @@ export default function Event({ onPrev }) {
           <h2 className="event__rsvp-title">Bạn có đến không? 🤔</h2>
           <p className="event__rsvp-subtitle">Nhấn nút bên dưới để cho mình biết nhé!</p>
 
-          <motion.button
-            className="event__rsvp-btn"
-            onClick={handleRSVP}
-            onMouseEnter={() => setRsvpHover(true)}
-            onMouseLeave={() => setRsvpHover(false)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="event__rsvp-btn-text">
-              {rsvpHover ? 'Đi chứ!' : 'Tham dự'}
-            </span>
-            <span className="event__rsvp-btn-emoji">
-              {rsvpHover ? '🎊' : '🤔'}
-            </span>
-          </motion.button>
+          {/* Hai nút: Tham dự + Từ chối */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '1.5rem',
+            position: 'relative',
+            minHeight: '80px',
+            marginTop: '0.5rem',
+          }}>
+            <motion.button
+              className="event__rsvp-btn"
+              onClick={handleRSVP}
+              onMouseEnter={() => setRsvpHover(true)}
+              onMouseLeave={() => setRsvpHover(false)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="event__rsvp-btn-text">
+                {rsvpHover ? 'Đi chứ!' : 'Tham dự'}
+              </span>
+              <span className="event__rsvp-btn-emoji">
+                {rsvpHover ? '🎊' : '🤔'}
+              </span>
+            </motion.button>
+
+            {/* Nút Từ chối — chạy trốn khi hover */}
+            <motion.button
+              ref={declineBtnRef}
+              onClick={handleDeclineClick}
+              onMouseEnter={handleDeclineHover}
+              animate={{
+                x: declinePos.x,
+                y: declinePos.y,
+              }}
+              transition={{
+                type: 'spring',
+                stiffness: 300,
+                damping: 15,
+              }}
+              style={{
+                padding: '0.7rem 1.6rem',
+                background: 'rgba(255, 255, 255, 0.06)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                borderRadius: '9999px',
+                color: 'var(--color-text-muted)',
+                fontSize: '0.95rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                fontFamily: 'var(--font-body)',
+                whiteSpace: 'nowrap',
+                userSelect: 'none',
+              }}
+            >
+              Từ chối 😢
+            </motion.button>
+          </div>
+
+          {/* Tin nhắn troll khi cố bấm Từ chối */}
+          <AnimatePresence>
+            {showDeclineMsg && (
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                style={{
+                  marginTop: '1rem',
+                  padding: '0.8rem 1.5rem',
+                  background: 'rgba(255, 107, 107, 0.15)',
+                  border: '1px solid rgba(255, 107, 107, 0.3)',
+                  borderRadius: '12px',
+                  color: '#FF6B6B',
+                  fontWeight: 600,
+                  fontSize: '0.95rem',
+                  textAlign: 'center',
+                }}
+              >
+                {declineMessages[Math.floor(Math.random() * declineMessages.length)]}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <p className="event__rsvp-note">
             * Bấm để điền thông tin nhanh gọn trực tiếp tại đây!
