@@ -51,10 +51,6 @@ export default function Wishes({ onNext, onPrev }) {
             <span>Viết lời chúc chân thành từ trái tim</span>
           </div>
           <div className="wishes__instruction-item">
-            <span className="wishes__instruction-icon">📸</span>
-            <span>Có thể đính kèm ảnh kỷ niệm (nếu có)</span>
-          </div>
-          <div className="wishes__instruction-item">
             <span className="wishes__instruction-icon">😂</span>
             <span>Lời chúc hài hước được ưu tiên 10 điểm!</span>
           </div>
