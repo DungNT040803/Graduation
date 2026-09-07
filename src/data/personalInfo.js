@@ -32,7 +32,7 @@ export const personalInfo = {
   futureGoals: [
     { icon: "🚀", text: "Trở thành Full-stack Developer (vibe code \"chắc là được\")" },
     { icon: "💰", text: "Kiếm thật nhiều tiền (không biết có được không)" },
-    { icon: "🌍", text: "Game thủ chuyên nghiệp" },
+    { icon: "🎮", text: "Game thủ chuyên nghiệp" },
     { icon: "📚", text: "Học thêm nhiều công nghệ mới (nhưng chắc sẽ lười)" },
   ],
   avatar: "./images/avatar.jpg",
