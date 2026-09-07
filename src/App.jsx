@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MusicPlayer from './components/Layout/MusicPlayer';
+import GalaxyTransition from './components/Effects/GalaxyTransition';
 import EnvelopeIntro from './pages/EnvelopeIntro';
 import Home from './pages/Home';
 import Thoughts from './pages/Thoughts';
@@ -9,30 +10,49 @@ import Wishes from './pages/Wishes';
 import Event from './pages/Event';
 
 // ==========================================
-// 🔊 Subtle Web Audio Page Turn Sound
+// 🔊 Cosmic Web Audio Page Turn Sound
 // ==========================================
 function playPageTurnSound() {
   try {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) return;
     const ctx = new AudioContext();
-    const bufferSize = Math.floor(ctx.sampleRate * 0.24);
+
+    // 1. Soft cosmic breeze sweep
+    const bufferSize = Math.floor(ctx.sampleRate * 0.28);
     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
       const envelope = Math.sin((i / bufferSize) * Math.PI);
-      data[i] = (Math.random() * 2 - 1) * envelope * 0.15;
+      data[i] = (Math.random() * 2 - 1) * envelope * 0.12;
     }
     const source = ctx.createBufferSource();
     source.buffer = buffer;
     const filter = ctx.createBiquadFilter();
     filter.type = 'bandpass';
-    filter.frequency.setValueAtTime(1500, ctx.currentTime);
-    filter.Q.setValueAtTime(0.9, ctx.currentTime);
+    filter.frequency.setValueAtTime(1800, ctx.currentTime);
+    filter.Q.setValueAtTime(0.8, ctx.currentTime);
     source.connect(filter);
     filter.connect(ctx.destination);
     source.start();
-    setTimeout(() => ctx.close().catch(() => {}), 500);
+
+    // 2. Delicate starry bell tone (A5 -> E6)
+    [880, 1318.51].forEach((freq, idx) => {
+      const oscTime = ctx.currentTime + 0.04 + idx * 0.08;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, oscTime);
+      gain.gain.setValueAtTime(0.0001, oscTime);
+      gain.gain.exponentialRampToValueAtTime(0.05, oscTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, oscTime + 0.35);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(oscTime);
+      osc.stop(oscTime + 0.4);
+    });
+
+    setTimeout(() => ctx.close().catch(() => {}), 600);
   } catch {
     // Ignore audio errors
   }
@@ -97,24 +117,6 @@ const pageVariants = {
   }),
 };
 
-// ==========================================
-// 🌠 Luminous Light Curtain Wipe
-// ==========================================
-const curtainVariants = {
-  initial: (direction) => ({
-    x: direction > 0 ? '-100%' : '200%',
-    opacity: 0,
-  }),
-  animate: (direction) => ({
-    x: direction > 0 ? '220%' : '-120%',
-    opacity: [0, 0.85, 0.85, 0],
-    transition: {
-      duration: 0.8,
-      ease: [0.25, 1, 0.5, 1],
-    },
-  }),
-  exit: { opacity: 0, transition: { duration: 0.1 } },
-};
 
 const STEP_NAMES = [
   'Trang Chủ',
@@ -216,29 +218,13 @@ export default function App() {
             style={{ minHeight: '100vh', position: 'relative' }}
           >
             {/* ====================================================
-                CINEMATIC LIGHT CURTAIN SWEEP
+                🌌 GALAXY COSMIC WARP TRANSITION
             ==================================================== */}
             <AnimatePresence>
               {isTransitioning && (
-                <motion.div
-                  key={`curtain-${currentStep}`}
-                  custom={direction}
-                  variants={curtainVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '35vw',
-                    height: '100%',
-                    background:
-                      'linear-gradient(90deg, transparent 0%, rgba(255,217,61,0.06) 30%, rgba(255,217,61,0.2) 65%, rgba(255,255,255,0.7) 95%, transparent 100%)',
-                    boxShadow: '0 0 50px rgba(255, 217, 61, 0.35)',
-                    zIndex: 75,
-                    pointerEvents: 'none',
-                  }}
+                <GalaxyTransition
+                  key={`galaxy-${currentStep}`}
+                  direction={direction}
                 />
               )}
             </AnimatePresence>
