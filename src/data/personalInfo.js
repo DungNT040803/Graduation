@@ -12,7 +12,7 @@ export const personalInfo = {
   hometown: "Thành phố Sơn La, Việt Nam",
   relationshipStatus: "Đang hẹn hò 💕",
   hobbies: [
-    { text: "Code", emoji: "💻" },
+    { text: "Vibe Code", emoji: "💻" },
     { text: "Ngủ", emoji: "😴" },
     { text: "Ăn uống", emoji: "🍜" },
     { text: "Chơi game", emoji: "🎮" },
