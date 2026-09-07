@@ -371,7 +371,7 @@ export default function RSVPModal({ isOpen, onClose, scriptUrl }) {
                     </label>
                     <textarea
                       name="note"
-                      placeholder="Ăn chay, dị ứng gì không? Hoặc nhắn gì cho chủ tiệc... 😄"
+                      placeholder="Đến muộn hay bận gì không hoặc nhắn gì cho Dũng cũng được nhé... 😄"
                       value={formData.note}
                       onChange={handleChange}
                       onFocus={() => setFocusedField('note')}
