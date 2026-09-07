@@ -26,14 +26,14 @@ export const personalInfo = {
     "Nhìn lại hành trình vừa qua, có những đêm thức trắng làm đồ án, những dòng code chạy bằng niềm tin, những lần bug đến mức muốn bỏ nghề… và tất nhiên là không thể thiếu những câu: \"Thôi kệ, mai sửa.\" 🐛💻😂",
     "May mắn là trên hành trình này mình luôn có gia đình, thầy cô và đặc biệt là những người bạn đã cùng nhau vượt qua deadline, vượt qua môn học và vượt qua cả những lần muốn bỏ cuộc. 🤣",
     "Và giờ đây, sau 4 năm, mình chính thức chuẩn bị chuyển từ \"sinh viên FPT\" → \"người thất nghiệp có bằng đại học\". 😌🎓",
-    "Ngày vui này chắc chắn sẽ vui hơn rất nhiều nếu có bạn đến chung vui, ăn uống, chụp ảnh và cùng mình tạo thêm một kỷ niệm đáng nhớ trước khi mỗi đứa lại lao vào cuộc đời của riêng mình. 🥂❤️"
+    "Ngày vui này chắc chắn sẽ vui hơn rất nhiều nếu có bạn đến chung vui, chụp ảnh và cùng mình tạo thêm một kỷ niệm đáng nhớ trước khi mỗi đứa lại lao vào cuộc đời của riêng mình. 🥂❤️"
   ],
   motto: "Sống là phải vui, buồn thì đi ngủ! 😄",
   futureGoals: [
-    { icon: "🚀", text: "Trở thành Full-stack Developer" },
-    { icon: "💰", text: "Kiếm thật nhiều tiền" },
-    { icon: "🌍", text: "Du lịch vòng quanh thế giới" },
-    { icon: "📚", text: "Học thêm nhiều công nghệ mới" },
+    { icon: "🚀", text: "Trở thành Full-stack Developer (vibe code \"chắc là được\")" },
+    { icon: "💰", text: "Kiếm thật nhiều tiền (không biết có được không)" },
+    { icon: "🌍", text: "Game thủ chuyên nghiệp" },
+    { icon: "📚", text: "Học thêm nhiều công nghệ mới (nhưng chắc sẽ lười)" },
   ],
   avatar: "./images/avatar.jpg",
   // Tooltip vui nhộn khi hover vào các mục
